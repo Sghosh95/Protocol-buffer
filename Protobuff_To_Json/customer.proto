@@ -1,0 +1,38 @@
+syntax="proto3";
+
+//Create a message for a Product
+message Product
+{
+    string id=1;
+    string name=2;
+    float price=3;
+    //means it can store three column
+}
+// A message for Customer
+message Customer
+{
+    string cust_id=1;
+    string name=2;
+    string email=3;
+}
+
+//Define a messga for order item
+message OrderItem{
+    string product_id=1;
+    int64 quantity=2;
+}
+
+// Define a message for an order.
+message Order {
+    string id = 1;
+    // a customer type we are including
+    Customer customer = 2;
+    //reapeated orderitems
+    repeated OrderItem items = 3;
+  }
+  
+  // Define a message for an order request.
+  message OrderRequest {
+    Order order = 1;
+    bool express_shipping = 2;
+  }
