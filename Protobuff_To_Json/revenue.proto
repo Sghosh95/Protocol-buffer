@@ -1,0 +1,19 @@
+syntax="proto3";
+ 
+//import the required .proto file here
+//to define stucure and nested dependencies
+import "customer.proto";
+
+message Department{
+    string dept_id=1;
+    string dept_name=2;
+    repeated Sub_Department sub_dept=3; 
+}
+
+message Sub_Department
+{
+    string sub_dept_id=1;
+    string sub_dept_name=2;
+    Order order=3;
+    bool revenue_generated=4;
+}

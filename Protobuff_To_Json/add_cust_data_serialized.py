@@ -8,23 +8,23 @@ product.id="10"
 product.name="laptop"
 product.price=35000
 
-#add Customer details 
-customer=helper.Customer() #helper.message()
+#add Customer details
+customer=helper.Customer()
 customer.cust_id="123"
 customer.name="Sourav Ghosh"
 customer.email="Sourav.gmail.com"
 
-#add oderItem 
+#add oderItem
 orderItem=helper.OrderItem()
 orderItem.product_id="45436"
 orderItem.quantity=234
 
-#adding Order
+ #adding Order
 order=helper.Order()
 order.id="235"
 #copying from customer
 order.customer.CopyFrom(customer)
-order.items.extend([orderItem]) 
+order.items.extend([orderItem])
 
 #SERIALIZE THE DATA
 
@@ -43,10 +43,11 @@ if __name__=="__main__":
     print(customer)
     print("=====================")
     print("customer_serialized")
-    print("=======>",customer_serialized)
+    print("======>",customer_serialized)
+
     print("===================================")
     print("Order data:")
     print(order)
     print("=====================")
     print("order_serialized")
-    print("=======>",order_serialized)
+    print("======>",order_serialized)
