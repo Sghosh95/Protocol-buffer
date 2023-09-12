@@ -1,0 +1,46 @@
+A:
+customer.proto
+compile = customer_pb2.py
+add_cust_data_serialized.py   
+see_cust_data_deserialized_json.py
+revenue.proto
+revenue_pb2.py
+add_rev_data.py
+
+#####################################################
+B.
+This will create a topic with help of admin client of kafka with the topic name you give
+------------------------------------------------------------------------------------------
+before that :
+------------------------------------------------------------------------------------------
+-->start zookeeper 
+kafka/bin/zookeeper-server-start.sh kafka/config/zookeeper.properties
+-->start kafka server
+kafka/bin/kafka-server-start.sh kafka/config/server.properties
+-->check the topic list :
+if present then delete (else make required changes to error handling in send_department_to_snowflake.py)
+kafka/bin/kafka-topics.sh --list --zookeeper localhost:2181
+kafka/bin/kafka-topics.sh --delete --topic snowflake_department_topic --zookeeper localhost:2181
+------------------------------------------------------------------------------------------
+C.
+Now :
+send_department_to_snowflake.py : You will see topic gets created and serialized data has been pushed to topic
+and it will ingest data in serialized binary format.
+------------------------------------------------------------------------------------------
+D.
+Now : kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic snowflake_department_topic
+you will see some serialized message while you consume This
+------------------------------------------------------------------------------------------
+E.
+Start the kafka-snowflake-sink connector :
+
+kafka/bin/connect-standalone.sh kafka/config/connect-standalone.properties kafka/config/SF_connect.properties
+
+validate the serialized data 
+
+
+
+Further improvement:
+========================================================================================================
+1.Deserialize the data stored in snowflake
+2.Load it to relational table
